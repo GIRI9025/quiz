@@ -1,6 +1,14 @@
 
 
 
+
+
+
+
+
+
+
+
 import React, { useState, useEffect } from "react";
 
 const questions =[
@@ -343,7 +351,6 @@ const questions =[
     answer: "புறநடைப்பயிற்சி"
   }
 ];
-
 export default function QuizApp() {
   const [name, setName] = useState("");
   const [start, setStart] = useState(false);
@@ -371,7 +378,7 @@ export default function QuizApp() {
     return () => clearTimeout(timer);
   }, [time, start]);
 
-  // 🚫 Reset if tab change
+  // 🚫 Tab change reset
   useEffect(() => {
     const handleVisibility = () => {
       if (document.hidden) {
@@ -384,10 +391,10 @@ export default function QuizApp() {
     };
   }, []);
 
-  // ✅ Fetch leaderboard from MongoDB
+  // ✅ Fetch leaderboard (UPDATED URL)
   useEffect(() => {
     if (finished) {
-      fetch("http://localhost:5000/leaderboard")
+      fetch("https://quiz-z0gw.onrender.com/leaderboard")
         .then(res => res.json())
         .then(data => setLeaderboard(data));
     }
@@ -415,8 +422,8 @@ export default function QuizApp() {
       setIndex(index + 1);
     } else {
 
-      // ✅ Save to MongoDB
-      fetch("http://localhost:5000/save", {
+      // ✅ Save to MongoDB (UPDATED URL)
+      fetch("https://quiz-z0gw.onrender.com/save", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
